@@ -30,6 +30,11 @@ function getQuantityElements(heightElement) {
 
 function startGame() {
     start.classList.add('hide');
+    score.classList.remove('hide');
+    gameArea.innerHTML = '';
+    car.style.left = '50%';
+    car.style.bottom = '15px;';
+    car.style.top = 'unset';
 
     for(let i = 0; i < getQuantityElements(100); i++) {
         const line = document.createElement('div');
@@ -49,6 +54,7 @@ function startGame() {
         gameArea.appendChild(enemy);
     }
 
+    settings.score = 0;
     settings.start = true;
 
     gameArea.appendChild(car);
@@ -62,6 +68,9 @@ function startGame() {
 function playGame(){
 
     if(settings.start) {
+
+    settings.score += settings.speed;
+    score.textContent = 'Score: ' + settings.score;
 
     moveRoad();
     moveEnemy();
@@ -121,10 +130,22 @@ function moveEnemy() {
 
 
     enemies.forEach(function(enemy) {
+        let carRect = car.getBoundingClientRect(),
+            enemyRect = enemy.getBoundingClientRect();
+        
+        if(carRect.top <= enemyRect.bottom &&
+        carRect.right >= enemyRect.left &&
+        carRect.left <= enemyRect.right &&
+        carRect.bottom >= enemyRect.top){
+            console.warn('ДТП');
+            settings.start = false;
+            start.classList.remove('hide');
+            start.style.top = score.offsetHeight + 10px;
+        }
+
+
         enemy.y += settings.speed / 2;
         enemy.style.top = enemy.y + 'px';
-
-
 
         if(enemy.y >= document.documentElement.clientHeight) {
             enemy.y = -100 * settings.traffic;

@@ -43,7 +43,7 @@ table {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .car, .enemy {
@@ -81,4 +81,46 @@ table {
     left: 50%;
     transform: translateX(-50%);
     z-index: 2
+}
+
+.start {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30%;
+    height: 50px;
+    border-radius: 10em;
+    display: flex;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #193130;
+    cursor: pointer;
+    font-family: sans-serif;
+    background: #3a8682;
+    color: #fff;
+    transition: 1s;
+}
+
+.start:hover {
+    background: #173130;
+}
+
+.score {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30%;
+    height: 50px;
+    border-radius: 10em;
+    display: flex;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #193130;
+    cursor: pointer;
+    font-family: sans-serif;
+    background: #222;
+    color: #fff;
+    transition: 1s;
 }
